@@ -47,7 +47,7 @@ public class AccessTokenKeeper {
             return;
         }
 
-        SharedPreferences pref = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_APPEND);
+        SharedPreferences pref = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
         editor.putString(KEY_UID, token.getUid());
         editor.putString(KEY_ACCESS_TOKEN, token.getToken());
@@ -68,7 +68,7 @@ public class AccessTokenKeeper {
         }
 
         Oauth2AccessToken token = new Oauth2AccessToken();
-        SharedPreferences pref = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_APPEND);
+        SharedPreferences pref = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         token.setUid(pref.getString(KEY_UID, ""));
         token.setToken(pref.getString(KEY_ACCESS_TOKEN, ""));
         token.setRefreshToken(pref.getString(KEY_REFRESH_TOKEN, ""));
@@ -87,7 +87,7 @@ public class AccessTokenKeeper {
             return;
         }
 
-        SharedPreferences pref = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_APPEND);
+        SharedPreferences pref = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
         editor.clear();
         editor.commit();

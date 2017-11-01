@@ -15,3 +15,7 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-keep class com.sina.weibo.sdk.** { *; }
+-keep class com.tencent.open.** { *; }
+-keep class com.tencent.mm.**{*;}

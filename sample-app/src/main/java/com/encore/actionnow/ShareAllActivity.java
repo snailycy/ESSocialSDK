@@ -10,11 +10,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.elbbbird.android.socialsdk.SocialSDK;
+import com.elbbbird.android.socialsdk.event.ShareBusEvent;
 import com.elbbbird.android.socialsdk.model.SocialShareScene;
-import com.elbbbird.android.socialsdk.otto.BusProvider;
-import com.elbbbird.android.socialsdk.otto.ShareBusEvent;
 import com.encore.actionnow.app.BaseActivity;
-import com.squareup.otto.Subscribe;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -57,7 +58,7 @@ public class ShareAllActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         /*********************************************/
-        BusProvider.getInstance().register(this);
+        EventBus.getDefault().register(this);
         /*********************************************/
     }
 
@@ -83,7 +84,7 @@ public class ShareAllActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         /*********************************************/
-        BusProvider.getInstance().unregister(this);
+        EventBus.getDefault().unregister(this);
         /*********************************************/
         super.onDestroy();
 

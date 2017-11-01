@@ -7,8 +7,8 @@ import com.elbbbird.android.socialsdk.model.SocialInfo;
 import com.elbbbird.android.socialsdk.model.SocialToken;
 import com.elbbbird.android.socialsdk.model.SocialUser;
 import com.elbbbird.android.socialsdk.sso.SocialSSOProxy;
-import com.tencent.mm.sdk.modelbase.BaseResp;
-import com.tencent.mm.sdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
 import org.json.JSONException;
 import org.json.JSONObject;

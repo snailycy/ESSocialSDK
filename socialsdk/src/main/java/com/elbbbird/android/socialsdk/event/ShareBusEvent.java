@@ -1,4 +1,4 @@
-package com.elbbbird.android.socialsdk.otto;
+package com.elbbbird.android.socialsdk.event;
 
 /**
  * Created by zhanghailong-ms on 2015/11/23.

@@ -8,15 +8,16 @@ import android.view.View;
 
 import com.elbbbird.android.socialsdk.R;
 import com.elbbbird.android.socialsdk.SocialSDK;
+import com.elbbbird.android.socialsdk.event.ShareBusEvent;
 import com.elbbbird.android.socialsdk.model.SocialInfo;
 import com.elbbbird.android.socialsdk.model.SocialShareScene;
-import com.elbbbird.android.socialsdk.otto.BusProvider;
-import com.elbbbird.android.socialsdk.otto.ShareBusEvent;
 import com.elbbbird.android.socialsdk.view.ShareButton;
 import com.sina.weibo.sdk.api.share.BaseResponse;
 import com.sina.weibo.sdk.api.share.IWeiboHandler;
 import com.sina.weibo.sdk.constant.WBConstants;
 import com.tencent.connect.common.Constants;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * 一键社会化分享
@@ -123,13 +124,13 @@ public class SocialShareActivity extends Activity implements IWeiboHandler.Respo
     public void onResponse(BaseResponse baseResponse) {
         switch (baseResponse.errCode) {
             case WBConstants.ErrorCode.ERR_OK:
-                BusProvider.getInstance().post(new ShareBusEvent(ShareBusEvent.TYPE_SUCCESS, scene.getType(), scene.getId()));
+                EventBus.getDefault().post(new ShareBusEvent(ShareBusEvent.TYPE_SUCCESS, scene.getType(), scene.getId()));
                 break;
             case WBConstants.ErrorCode.ERR_CANCEL:
-                BusProvider.getInstance().post(new ShareBusEvent(ShareBusEvent.TYPE_CANCEL, scene.getType()));
+                EventBus.getDefault().post(new ShareBusEvent(ShareBusEvent.TYPE_CANCEL, scene.getType()));
                 break;
             case WBConstants.ErrorCode.ERR_FAIL:
-                BusProvider.getInstance().post(new ShareBusEvent(ShareBusEvent.TYPE_FAILURE, scene.getType(), new Exception("WBConstants.ErrorCode.ERR_FAIL: "
+                EventBus.getDefault().post(new ShareBusEvent(ShareBusEvent.TYPE_FAILURE, scene.getType(), new Exception("WBConstants.ErrorCode.ERR_FAIL: "
                         + baseResponse.errMsg)));
                 break;
         }

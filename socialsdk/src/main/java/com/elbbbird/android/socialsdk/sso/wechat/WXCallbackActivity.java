@@ -6,12 +6,12 @@ import android.os.Bundle;
 
 import com.elbbbird.android.socialsdk.WeChat;
 import com.elbbbird.android.socialsdk.share.wechat.WeChatShareProxy;
-import com.tencent.mm.sdk.modelbase.BaseReq;
-import com.tencent.mm.sdk.modelbase.BaseResp;
-import com.tencent.mm.sdk.modelmsg.SendAuth;
-import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.opensdk.modelbase.BaseReq;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 
 /**
  * 微信授权，分享回调activity

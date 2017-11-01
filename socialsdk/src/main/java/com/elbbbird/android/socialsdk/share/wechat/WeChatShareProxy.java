@@ -4,10 +4,10 @@ import android.content.Context;
 
 import com.elbbbird.android.socialsdk.SocialUtils;
 import com.elbbbird.android.socialsdk.WeChat;
-import com.tencent.mm.sdk.modelbase.BaseResp;
-import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
-import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
-import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 
 /**
  * 微信分享Proxy

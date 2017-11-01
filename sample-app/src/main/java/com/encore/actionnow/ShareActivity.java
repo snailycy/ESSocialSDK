@@ -10,15 +10,16 @@ import android.view.View;
 import android.widget.Button;
 
 import com.elbbbird.android.socialsdk.SocialSDK;
+import com.elbbbird.android.socialsdk.event.ShareBusEvent;
 import com.elbbbird.android.socialsdk.model.SocialShareScene;
-import com.elbbbird.android.socialsdk.otto.BusProvider;
-import com.elbbbird.android.socialsdk.otto.ShareBusEvent;
 import com.encore.actionnow.app.BaseActivity;
 import com.sina.weibo.sdk.api.share.BaseResponse;
 import com.sina.weibo.sdk.api.share.IWeiboHandler;
 import com.sina.weibo.sdk.constant.WBConstants;
-import com.squareup.otto.Subscribe;
 import com.tencent.connect.common.Constants;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -90,7 +91,7 @@ public class ShareActivity extends BaseActivity implements IWeiboHandler.Respons
 
 
         /*********************************************/
-        BusProvider.getInstance().register(this);
+        EventBus.getDefault().register(this);
         /*********************************************/
     }
 
@@ -113,7 +114,7 @@ public class ShareActivity extends BaseActivity implements IWeiboHandler.Respons
     @Override
     protected void onDestroy() {
         /*********************************************/
-        BusProvider.getInstance().unregister(this);
+        EventBus.getDefault().unregister(this);
         /*********************************************/
         super.onDestroy();
     }
@@ -129,13 +130,13 @@ public class ShareActivity extends BaseActivity implements IWeiboHandler.Respons
     public void onResponse(BaseResponse baseResponse) {
         switch (baseResponse.errCode) {
             case WBConstants.ErrorCode.ERR_OK:
-                BusProvider.getInstance().post(new ShareBusEvent(ShareBusEvent.TYPE_SUCCESS, scene.getType(), scene.getId()));
+                EventBus.getDefault().post(new ShareBusEvent(ShareBusEvent.TYPE_SUCCESS, scene.getType(), scene.getId()));
                 break;
             case WBConstants.ErrorCode.ERR_CANCEL:
-                BusProvider.getInstance().post(new ShareBusEvent(ShareBusEvent.TYPE_CANCEL, scene.getType()));
+                EventBus.getDefault().post(new ShareBusEvent(ShareBusEvent.TYPE_CANCEL, scene.getType()));
                 break;
             case WBConstants.ErrorCode.ERR_FAIL:
-                BusProvider.getInstance().post(new ShareBusEvent(ShareBusEvent.TYPE_FAILURE, scene.getType(), new Exception("WBConstants.ErrorCode.ERR_FAIL")));
+                EventBus.getDefault().post(new ShareBusEvent(ShareBusEvent.TYPE_FAILURE, scene.getType(), new Exception("WBConstants.ErrorCode.ERR_FAIL")));
                 break;
         }
     }

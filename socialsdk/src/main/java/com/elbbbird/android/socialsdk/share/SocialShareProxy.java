@@ -7,10 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.elbbbird.android.socialsdk.SocialSDK;
+import com.elbbbird.android.socialsdk.event.ShareBusEvent;
 import com.elbbbird.android.socialsdk.model.SocialInfo;
 import com.elbbbird.android.socialsdk.model.SocialShareScene;
-import com.elbbbird.android.socialsdk.otto.BusProvider;
-import com.elbbbird.android.socialsdk.otto.ShareBusEvent;
 import com.elbbbird.android.socialsdk.share.qq.QQShareProxy;
 import com.elbbbird.android.socialsdk.share.wechat.IWXShareCallback;
 import com.elbbbird.android.socialsdk.share.wechat.WeChatShareProxy;
@@ -23,6 +22,8 @@ import com.sina.weibo.sdk.exception.WeiboException;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * 社会化分享代理
@@ -52,21 +53,21 @@ public class SocialShareProxy {
         public void onSuccess() {
             if (DEBUG)
                 Log.i(TAG, "SocialShareProxy#wechatShareCallback onSuccess");
-            BusProvider.getInstance().post(new ShareBusEvent(ShareBusEvent.TYPE_SUCCESS, scene.getType(), scene.getId()));
+            EventBus.getDefault().post(new ShareBusEvent(ShareBusEvent.TYPE_SUCCESS, scene.getType(), scene.getId()));
         }
 
         @Override
         public void onCancel() {
             if (DEBUG)
                 Log.i(TAG, "SocialShareProxy#wechatShareCallback onCancel");
-            BusProvider.getInstance().post(new ShareBusEvent(ShareBusEvent.TYPE_CANCEL, scene.getType()));
+            EventBus.getDefault().post(new ShareBusEvent(ShareBusEvent.TYPE_CANCEL, scene.getType()));
         }
 
         @Override
         public void onFailure(Exception e) {
             if (DEBUG)
                 Log.i(TAG, "SocialShareProxy#wechatShareCallback onFailure");
-            BusProvider.getInstance().post(new ShareBusEvent(ShareBusEvent.TYPE_FAILURE, scene.getType(), e));
+            EventBus.getDefault().post(new ShareBusEvent(ShareBusEvent.TYPE_FAILURE, scene.getType(), e));
         }
     };
 
@@ -120,21 +121,21 @@ public class SocialShareProxy {
                         Oauth2AccessToken token = Oauth2AccessToken.parseAccessToken(bundle);
                         if (token.isSessionValid())
                             AccessTokenKeeper.writeAccessToken(context, token);
-//                        BusProvider.getInstance().post(new ShareBusEvent(ShareBusEvent.TYPE_SUCCESS, scene.getType(), scene.getId()));
+//                        EventBus.getDefault().post(new ShareBusEvent(ShareBusEvent.TYPE_SUCCESS, scene.getType(), scene.getId()));
                     }
 
                     @Override
                     public void onWeiboException(WeiboException e) {
                         if (DEBUG)
                             Log.i(TAG, "SocialShareProxy#shareToWeibo onWeiboException " + e.toString());
-//                        BusProvider.getInstance().post(new ShareBusEvent(ShareBusEvent.TYPE_FAILURE, scene.getType(), e));
+//                        EventBus.getDefault().post(new ShareBusEvent(ShareBusEvent.TYPE_FAILURE, scene.getType(), e));
                     }
 
                     @Override
                     public void onCancel() {
                         if (DEBUG)
                             Log.i(TAG, "SocialShareProxy#shareToWeibo onCancel");
-//                        BusProvider.getInstance().post(new ShareBusEvent(ShareBusEvent.TYPE_CANCEL, scene.getType()));
+//                        EventBus.getDefault().post(new ShareBusEvent(ShareBusEvent.TYPE_CANCEL, scene.getType()));
                     }
                 });
 
@@ -147,9 +148,9 @@ public class SocialShareProxy {
             if (DEBUG)
                 Log.i(TAG, "SocialShareProxy#qShareListener onComplete");
             if (scene == null) {
-                BusProvider.getInstance().post(new ShareBusEvent(ShareBusEvent.TYPE_SUCCESS, 0, -1));
+                EventBus.getDefault().post(new ShareBusEvent(ShareBusEvent.TYPE_SUCCESS, 0, -1));
             } else {
-                BusProvider.getInstance().post(new ShareBusEvent(ShareBusEvent.TYPE_SUCCESS, scene.getType(), scene.getId()));
+                EventBus.getDefault().post(new ShareBusEvent(ShareBusEvent.TYPE_SUCCESS, scene.getType(), scene.getId()));
             }
         }
 
@@ -158,7 +159,7 @@ public class SocialShareProxy {
             if (DEBUG)
                 Log.i(TAG, "SocialShareProxy#qShareListener onError :" + uiError.errorCode + " "
                         + uiError.errorMessage + " " + uiError.errorDetail);
-            BusProvider.getInstance().post(new ShareBusEvent(ShareBusEvent.TYPE_FAILURE, scene.getType(), new Exception(uiError.errorCode + " "
+            EventBus.getDefault().post(new ShareBusEvent(ShareBusEvent.TYPE_FAILURE, scene.getType(), new Exception(uiError.errorCode + " "
                     + uiError.errorMessage + " " + uiError.errorDetail)));
         }
 
@@ -166,7 +167,7 @@ public class SocialShareProxy {
         public void onCancel() {
             if (DEBUG)
                 Log.i(TAG, "SocialShareProxy#qShareListener onCancel");
-            BusProvider.getInstance().post(new ShareBusEvent(ShareBusEvent.TYPE_CANCEL, scene.getType()));
+            EventBus.getDefault().post(new ShareBusEvent(ShareBusEvent.TYPE_CANCEL, scene.getType()));
         }
     };
 

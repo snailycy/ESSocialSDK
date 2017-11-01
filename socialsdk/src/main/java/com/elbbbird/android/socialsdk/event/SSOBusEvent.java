@@ -1,4 +1,4 @@
-package com.elbbbird.android.socialsdk.otto;
+package com.elbbbird.android.socialsdk.event;
 
 import com.elbbbird.android.socialsdk.model.SocialToken;
 import com.elbbbird.android.socialsdk.model.SocialUser;
