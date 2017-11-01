@@ -16,6 +16,8 @@
 #   public *;
 #}
 
--keep class com.sina.weibo.sdk.** { *; }
 -keep class com.tencent.open.** { *; }
 -keep class com.tencent.mm.**{*;}
+##微博
+-keep class com.sina.weibo.** {*;}
+-keep class com.sina.sso.** {*;}

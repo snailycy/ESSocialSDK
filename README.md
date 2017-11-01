@@ -72,16 +72,16 @@ public class WXEntryActivity extends WXCallbackActivity {
 ## 一键登录授权功能（微博，微信，QQ）
 
 ### 授权结果回调   
-SDK使用了[Otto](http://square.github.io/otto/)作为事件库，用以组件通信。
+SDK使用了eventbus作为事件库，用以组件通信。
 在调用`SocialSDK.oauth()`接口`Activity`的`onCreate()`方法内添加   
 ```java
-BusProvider.getInstance().register(this);
+EventBus.getDefault().register(this);
 ```
 在该`Activity`的`onDestroy()`方法添加   
 ```java
 @Override
 protected void onDestroy() {
-    BusProvider.getInstance().unregister(this);
+    EventBus.getDefault().unregister(this);
     super.onDestroy();
 }
 ```
@@ -219,13 +219,6 @@ SDK已经在aar中添加三个平台需要的权限，以下
 -keep public class com.sina.weibo.** {*;}
 -keep public class com.sina.sso.** {*;}
 
-##otto
--keepattributes *Annotation*
--keepclassmembers class ** {
-    @com.squareup.otto.Subscribe public *;
-    @com.squareup.otto.Produce public *;
-}
-```
 
 ## LICENSE
 
