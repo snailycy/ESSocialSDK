@@ -20,7 +20,7 @@
 
 ## Gradle
 ```groovy
-compile 'com.elbbbird.android:socialsdk:0.2.0@aar'
+compile 'com.github.snailycy:ESSocialSDK:1.1.1'
 ```
 
 ## Debug模式
