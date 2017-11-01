@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
+group='com.github.snailycy'
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -55,4 +57,10 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     // wechat
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+}
+
+repositories {
+    flatDir {
+        dirs 'libs' //this way we can find the .aar file in libs folder
+    }
 }
