@@ -16,7 +16,14 @@ public class SocialToken {
     public SocialToken() {
     }
 
-    public SocialToken(String openId,String unionid, String token, String refreshToken, long expiresTime) {
+    public SocialToken(String openId, String token, String refreshToken, long expiresTime) {
+        this.openId = openId;
+        this.token = token;
+        this.refreshToken = refreshToken;
+        this.expiresTime = System.currentTimeMillis() + expiresTime * 1000L;
+    }
+
+    public SocialToken(String openId, String unionid, String token, String refreshToken, long expiresTime) {
         this.openId = openId;
         this.unionid = unionid;
         this.token = token;
