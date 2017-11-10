@@ -8,6 +8,7 @@ package com.elbbbird.android.socialsdk.model;
 public class SocialToken {
 
     private String openId;
+    private String unionid;
     private String token;
     private String refreshToken;
     private long expiresTime;
@@ -15,8 +16,9 @@ public class SocialToken {
     public SocialToken() {
     }
 
-    public SocialToken(String openId, String token, String refreshToken, long expiresTime) {
+    public SocialToken(String openId,String unionid, String token, String refreshToken, long expiresTime) {
         this.openId = openId;
+        this.unionid = unionid;
         this.token = token;
         this.refreshToken = refreshToken;
         this.expiresTime = System.currentTimeMillis() + expiresTime * 1000L;
@@ -54,8 +56,22 @@ public class SocialToken {
         this.expiresTime = expiresTime;
     }
 
+    public String getUnionid() {
+        return unionid;
+    }
+
+    public void setUnionid(String unionid) {
+        this.unionid = unionid;
+    }
+
     @Override
     public String toString() {
-        return "SocialToken# openId=" + openId + ", token=" + token + ", refreshToken=" + refreshToken + ", expiresTime=" + expiresTime;
+        return "SocialToken{" +
+                "openId='" + openId + '\'' +
+                ", unionid='" + unionid + '\'' +
+                ", token='" + token + '\'' +
+                ", refreshToken='" + refreshToken + '\'' +
+                ", expiresTime=" + expiresTime +
+                '}';
     }
 }
