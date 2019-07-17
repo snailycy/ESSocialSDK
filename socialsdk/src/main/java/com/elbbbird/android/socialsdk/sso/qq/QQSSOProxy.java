@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.elbbbird.android.socialsdk.model.SocialToken;
-import com.elbbbird.android.socialsdk.sso.SocialSSOProxy;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQToken;
 import com.tencent.tauth.IUiListener;
@@ -29,16 +28,16 @@ public class QQSSOProxy {
 
     public static void login(Context context, String appId, String scope, IUiListener listener) {
         Tencent tencent = getTencentInstance(context, appId);
-        if (!SocialSSOProxy.isTokenValid(context)) {
+//        if (!SocialSSOProxy.isTokenValid(context)) {
             tencent.login((Activity) context, scope, listener);
-        }
+//        }
     }
 
     public static void logout(Context context, String appId) {
         Tencent tencent = getTencentInstance(context, appId);
-        if (SocialSSOProxy.isTokenValid(context)) {
+//        if (SocialSSOProxy.isTokenValid(context)) {
             tencent.logout(context);
-        }
+//        }
 
         QQSSOProxy.tencent = null;
     }
