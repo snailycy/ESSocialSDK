@@ -48,10 +48,10 @@ public class QQSSOProxy {
         //如果没有该过程刷新Global.getContext()等常量，会出现空指针
         getTencentInstance(context, appId);
 
-        if (SocialSSOProxy.isTokenValid(context)) {
+//        if (SocialSSOProxy.isTokenValid(context)) {
             UserInfo info = new UserInfo(context, parseToken(appId, token));
             info.getUserInfo(listener);
-        }
+//        }
     }
 
     private static QQToken parseToken(String appId, SocialToken socialToken) {
